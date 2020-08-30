@@ -1,5 +1,7 @@
 package br.com.zup.youtube.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +13,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zup.youtube.dto.VideoInputDTO;
+import br.com.zup.youtube.dto.VideoOutPutDTO;
 import br.com.zup.youtube.model.VideoEntity;
+import br.com.zup.youtube.service.VideoService;
 
 @RestController
 @RequestMapping("/api/v1")
 public class VideoController {
 
+	@Autowired
+	private VideoService service;
+
 	@GetMapping(value = "/video/{id}")
-	public ResponseEntity<VideoEntity> getVideo(@PathVariable("id") Long id) {
-		return null;
+	public ResponseEntity<VideoOutPutDTO> getVideo(@PathVariable("id") Long id) {
+		VideoOutPutDTO getVideo = service.getVideo(id);
+
+		return ResponseEntity.ok(getVideo);
 	}
 
-	@PostMapping(value = "/video")
-	public ResponseEntity<VideoEntity> saveVideo(@RequestBody VideoEntity user) {
-		return null;
+	@PostMapping(value = "/video/{id-usuario}")
+	public ResponseEntity<Object> saveVideo(@PathVariable("id-usuario") Long idUsuario,
+			@RequestBody VideoInputDTO videoDto) {
+		VideoOutPutDTO savedVideo = service.saveVideo(videoDto, idUsuario);
+
+		if (savedVideo == null) {
+			return new ResponseEntity<Object>("user id not found", HttpStatus.BAD_REQUEST);
+		}
+
+		return new ResponseEntity<Object>(savedVideo, HttpStatus.CREATED);
 	}
 
 	@PutMapping(value = "/video/{id}")
@@ -37,13 +54,15 @@ public class VideoController {
 		return null;
 	}
 
-	@PatchMapping(value = "/video/{id}")
-	public ResponseEntity<VideoEntity> likeVideo(@PathVariable("id") Long id) {
+	@PatchMapping(value = "/video/{id}/{like-number}")
+	public ResponseEntity<VideoEntity> likeVideo(@PathVariable("id") Long id,
+			@PathVariable("like-number") Long likeNumber) {
 		return null;
 	}
 
-	@PatchMapping(value = "/video/{id}")
-	public ResponseEntity<VideoEntity> unLikeVideo(@PathVariable("id") Long id) {
+	@PatchMapping(value = "/video/{id}/{dislike-number}")
+	public ResponseEntity<VideoEntity> unLikeVideo(@PathVariable("id") Long id,
+			@PathVariable("dislike-number") Long dislikeNumber) {
 		return null;
 	}
 }

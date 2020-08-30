@@ -1,7 +1,7 @@
 package br.com.zup.youtube.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,8 +24,6 @@ public class UserEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private Date registerDate;
-
 	private String email;
 
 	private String senha;
@@ -33,20 +32,18 @@ public class UserEntity implements Serializable {
 	@JoinColumn(name = "profile_id", referencedColumnName = "id")
 	private ProfileEntity profile;
 
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<ComentsEntity> coments;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<VideoEntity> videos;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Date getRegisterDate() {
-		return registerDate;
-	}
-
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
 	}
 
 	public String getEmail() {
@@ -71,6 +68,22 @@ public class UserEntity implements Serializable {
 
 	public void setProfile(ProfileEntity profile) {
 		this.profile = profile;
+	}
+
+	public List<ComentsEntity> getComents() {
+		return coments;
+	}
+
+	public void setComents(List<ComentsEntity> coments) {
+		this.coments = coments;
+	}
+
+	public List<VideoEntity> getVideos() {
+		return videos;
+	}
+
+	public void setVideos(List<VideoEntity> videos) {
+		this.videos = videos;
 	}
 
 }

@@ -1,7 +1,6 @@
 package br.com.zup.youtube.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class UserDTO implements Serializable {
 
@@ -11,8 +10,6 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-
-	private Date registerDate;
 
 	private String email;
 
@@ -26,14 +23,6 @@ public class UserDTO implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Date getRegisterDate() {
-		return registerDate;
-	}
-
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
 	}
 
 	public String getEmail() {

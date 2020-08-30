@@ -1,27 +1,14 @@
-package br.com.zup.youtube.model;
+package br.com.zup.youtube.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-@Entity
-public class VideoEntity implements Serializable {
+public class VideoInputDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
@@ -33,13 +20,6 @@ public class VideoEntity implements Serializable {
 	private Long likeVideo;
 
 	private Long deslikeVideo;
-
-	@OneToMany(mappedBy = "video", cascade = CascadeType.ALL)
-	private List<ComentsEntity> coments;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private UserEntity user;
 
 	private String url;
 
@@ -97,22 +77,6 @@ public class VideoEntity implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public List<ComentsEntity> getComents() {
-		return coments;
-	}
-
-	public void setComents(List<ComentsEntity> coments) {
-		this.coments = coments;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
 	}
 
 }

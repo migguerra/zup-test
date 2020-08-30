@@ -1,35 +1,16 @@
-package br.com.zup.youtube.model;
+package br.com.zup.youtube.dto;
 
-import java.io.Serializable;
+import br.com.zup.youtube.model.UserEntity;
+import br.com.zup.youtube.model.VideoEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+public class ComentarioDTO {
 
-@Entity
-public class ComentsEntity implements Serializable {
-
-	/**
-	 * 
-	 */
-
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String comentario;
 
-	@ManyToOne
-	@JoinColumn(name = "video_id")
 	private VideoEntity video;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
 	public Long getId() {
