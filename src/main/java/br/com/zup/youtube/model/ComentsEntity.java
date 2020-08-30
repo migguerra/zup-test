@@ -1,12 +1,14 @@
 package br.com.zup.youtube.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ComentsEntity implements Serializable {
@@ -23,7 +25,13 @@ public class ComentsEntity implements Serializable {
 
 	private String comentario;
 
-	private Date dataComentario;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "video_id")
+	private VideoEntity video;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id")
+	private UserEntity user;
 
 	public Long getId() {
 		return id;
@@ -41,12 +49,20 @@ public class ComentsEntity implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public Date getDataComentario() {
-		return dataComentario;
+	public VideoEntity getVideo() {
+		return video;
 	}
 
-	public void setDataComentario(Date dataComentario) {
-		this.dataComentario = dataComentario;
+	public void setVideo(VideoEntity video) {
+		this.video = video;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
 }
