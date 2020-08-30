@@ -32,6 +32,8 @@ public class VideoEntity implements Serializable {
 
 	private Long deslikeVideo;
 
+	private String url;
+	
 	public Long getId() {
 		return id;
 	}
@@ -86,6 +88,14 @@ public class VideoEntity implements Serializable {
 
 	public void setDeslikeVideo(Long deslikeVideo) {
 		this.deslikeVideo = deslikeVideo;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
