@@ -1,26 +1,15 @@
-package br.com.zup.youtube.model;
+package br.com.zup.youtube.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-
-@Entity
-public class UserEntity implements Serializable {
+public class UserDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private Date registerDate;
@@ -29,9 +18,7 @@ public class UserEntity implements Serializable {
 
 	private String senha;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "profile_id", referencedColumnName = "id")
-	private ProfileEntity profile;
+	private ProfileDTO profile;
 
 	public Long getId() {
 		return id;
@@ -65,11 +52,11 @@ public class UserEntity implements Serializable {
 		this.senha = senha;
 	}
 
-	public ProfileEntity getProfile() {
+	public ProfileDTO getProfile() {
 		return profile;
 	}
 
-	public void setProfile(ProfileEntity profile) {
+	public void setProfile(ProfileDTO profile) {
 		this.profile = profile;
 	}
 

@@ -2,10 +2,12 @@ package br.com.zup.youtube.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class ProfileEntity implements Serializable {
@@ -24,6 +26,9 @@ public class ProfileEntity implements Serializable {
 	private String nick;
 
 	private String address;
+
+	@OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
+	private UserEntity user;
 
 	public Long getId() {
 		return id;
@@ -55,5 +60,13 @@ public class ProfileEntity implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public UserEntity getUser() {
+		return user;
+	}
+
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 }
