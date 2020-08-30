@@ -1,5 +1,7 @@
 package br.com.zup.youtube.service;
 
+import java.util.List;
+
 import br.com.zup.youtube.dto.VideoInputDTO;
 import br.com.zup.youtube.dto.VideoOutPutDTO;
 
@@ -13,7 +15,7 @@ public interface VideoService {
 
 	public void deleteVideo(Long id);
 
-	public void likeVideo(Long id, Long numberLike);
+	public void likeVideo(Long id, Long numberLike, Long numberDeslike);
 
-	public void deslikeVideo(Long id, Long numberLike);
+	public List<VideoOutPutDTO> getListVideoByUser(Long idUser);
 }

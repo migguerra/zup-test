@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.zup.youtube.model.ComentsEntity;
-import br.com.zup.youtube.model.UserEntity;
 
 public class VideoOutPutDTO implements Serializable {
 
@@ -26,8 +25,6 @@ public class VideoOutPutDTO implements Serializable {
 	private Long deslikeVideo;
 
 	private List<ComentsEntity> coments;
-
-	private UserEntity user;
 
 	private String url;
 
@@ -93,14 +90,6 @@ public class VideoOutPutDTO implements Serializable {
 
 	public void setComents(List<ComentsEntity> coments) {
 		this.coments = coments;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
 	}
 
 }

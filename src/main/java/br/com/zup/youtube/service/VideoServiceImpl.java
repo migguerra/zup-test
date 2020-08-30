@@ -1,7 +1,9 @@
 package br.com.zup.youtube.service;
 
+import static java.util.stream.Collectors.toList;
 import static net.bytebuddy.utility.RandomString.make;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
@@ -32,7 +34,7 @@ public class VideoServiceImpl implements VideoService {
 
 		if (user.isPresent()) {
 
-			UserEntity userEntity = mapper.map(user, UserEntity.class);
+			UserEntity userEntity = user.get();
 			VideoEntity videoEntity = mapper.map(videoDTO, VideoEntity.class);
 
 			videoEntity.setUser(userEntity);
@@ -52,7 +54,7 @@ public class VideoServiceImpl implements VideoService {
 		Optional<VideoEntity> videoEntity = videoRepository.findById(id);
 
 		if (videoEntity.isPresent()) {
-			VideoOutPutDTO videoDto = mapper.map(videoEntity, VideoOutPutDTO.class);
+			VideoOutPutDTO videoDto = mapper.map(videoEntity.get(), VideoOutPutDTO.class);
 			return videoDto;
 		}
 
@@ -61,22 +63,41 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	public VideoOutPutDTO updateVideo(Long id, VideoInputDTO videoDTO) {
+		if (videoRepository.existsById(id)) {
+			VideoEntity videoEntity = mapper.map(videoDTO, VideoEntity.class);
+			videoEntity.setId(id);
+			return mapper.map(videoRepository.save(videoEntity), VideoOutPutDTO.class);
+		}
+
 		return null;
 	}
 
 	@Override
 	public void deleteVideo(Long id) {
-
+		videoRepository.deleteById(id);
 	}
 
 	@Override
-	public void likeVideo(Long id, Long numberLike) {
+	public void likeVideo(Long id, Long numberLike, Long numberDeslike) {
+		Optional<VideoEntity> videoEntity = videoRepository.findById(id);
+		if (videoEntity.isPresent()) {
 
+			VideoEntity videoEntityUpdated = videoEntity.get();
+			videoEntityUpdated.setLikeVideo(numberLike);
+			videoEntityUpdated.setDeslikeVideo(numberDeslike);
+
+			videoRepository.save(videoEntityUpdated);
+		}
 	}
 
 	@Override
-	public void deslikeVideo(Long id, Long numberLike) {
+	public List<VideoOutPutDTO> getListVideoByUser(Long idUser) {
 
+		List<VideoEntity> listVideo = videoRepository.findByUserId(idUser);
+		List<VideoOutPutDTO> listVideoDto = listVideo.stream().map(video -> mapper.map(video, VideoOutPutDTO.class))
+				.collect(toList());
+
+		return listVideoDto;
 	}
 
 }
