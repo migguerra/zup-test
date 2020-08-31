@@ -1,4 +1,4 @@
-# Awesome README [![Awesome]
+# Awesome README 
 Desafio criado pela Zup Bootcamp é construir a API que serve para Youtube, LinkedIn ou Instagram 
 Optei pela construção de um modelo de API semelhante a Youtube. A qual vai conter crud de usuario e videos alem de comentarios de videos.
 
@@ -55,7 +55,7 @@ localhost:8080/youtube/video
 ```
 nela e possivel cadastrar,editar,buscar e deletar video o video tem q ser vinculado a um usuario pelo seu id.
 
-Exemplo do json de usuario:
+Exemplo do json de video:
 
 ```javascript
 {
@@ -77,7 +77,7 @@ localhost:8080/youtube/coments
 ```
 nela e possivel cadastrar,editar,buscar e deletar comentarios, o comentario tem que ser associado a um usuario e a um video atraves de seus id's.
 
-Exemplo do json de usuario:
+Exemplo do json de comentario:
 
 ```javascript
 {
