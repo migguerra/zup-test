@@ -55,6 +55,9 @@ localhost:8080/youtube/video
 ```
 nela e possivel cadastrar,editar,buscar e deletar video o video tem q ser vinculado a um usuario pelo seu id.
 
+Exemplo para cadastrar um video deve ser chamado a api: localhost:8080/youtube/video/{id-usuario} usando o verbo POST enviando no body o json do video
+
+
 Exemplo do json de video:
 
 ```javascript
@@ -76,6 +79,8 @@ a rota de referente a video foi definida em:
 localhost:8080/youtube/coments
 ```
 nela e possivel cadastrar,editar,buscar e deletar comentarios, o comentario tem que ser associado a um usuario e a um video atraves de seus id's.
+
+Exemplo para cadastrar um comentario deve ser chamado a api: localhost:8080/youtube/usuario/{id-usuario}/video/{id-video} usando o verbo POST enviando no body o json do video
 
 Exemplo do json de comentario:
 
