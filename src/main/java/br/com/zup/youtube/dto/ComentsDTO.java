@@ -1,6 +1,13 @@
 package br.com.zup.youtube.dto;
 
-public class ComentarioDTO {
+import java.io.Serializable;
+
+public class ComentsDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 
